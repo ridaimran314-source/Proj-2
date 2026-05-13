@@ -1,0 +1,12 @@
+# Local API: place a trained checkpoint at artifacts/resnet50/best.pt (or override MODEL_PATH).
+services:
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.api
+    ports:
+      - "8000:8000"
+    environment:
+      MODEL_PATH: /app/models/best.pt
+    volumes:
+      - ./artifacts/resnet50/best.pt:/app/models/best.pt:ro

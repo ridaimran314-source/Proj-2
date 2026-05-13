@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Large / local data (track with DVC when you add it)
+dataset/raw/**/*.jpg
+dataset/raw/**/*.jpeg
+dataset/raw/**/*.png
+dataset/raw/**/*.webp
+dataset/train/
+dataset/val/
+dataset/test/
+splits/train/
+splits/val/
+splits/test/
+
+# Keep folder structure
+!dataset/raw/*/.gitkeep
+!dataset/raw/.gitkeep
+
+# Experiments
+mlruns/
+*.pt
+*.pth
+wandb/
+artifacts/
+
+# DVC local cache (commit dvc.yaml, dvc.lock, .dvc/config — not cache)
+.dvc/cache/
+.dvc/tmp/

@@ -1,0 +1,10 @@
+# DVC parameters (see dvc.yaml). Override locally or with `dvc exp run -S train.epochs=5`.
+train:
+  epochs: 25
+  batch_size: 16
+  lr: 0.0003
+  finetune_lr: 0.00006
+  backbone_freeze_epochs: 8
+  class_weights: auto
+  image_size: 224
+  num_workers: 0

@@ -1,0 +1,33 @@
+# Usage: `dvc init` once in repo root, then `dvc repro`.
+# Requires populated splits/train, val, test (see scripts/split_dataset.py).
+params:
+  - params.yaml:
+      - train
+
+stages:
+  train_models:
+    cmd: >
+      python scripts/train_models.py
+      --data-root splits/splits
+      --epochs ${train.epochs}
+      --batch-size ${train.batch_size}
+      --lr ${train.lr}
+      --finetune-lr ${train.finetune_lr}
+      --backbone-freeze-epochs ${train.backbone_freeze_epochs}
+      --class-weights ${train.class_weights}
+      --image-size ${train.image_size}
+      --num-workers ${train.num_workers}
+      --models resnet50 efficientnet_b0
+    deps:
+      - scripts/train_models.py
+      - src/politician_cnn
+      - splits/splits/train
+      - splits/splits/val
+      - splits/splits/test
+      - params.yaml
+    outs:
+      - artifacts:
+          cache: true
+    metrics:
+      - artifacts/comparison_summary.json:
+          cache: false
